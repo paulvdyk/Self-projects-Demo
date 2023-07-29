@@ -1,0 +1,296 @@
+Guessing game description:
+So what we did here is we made a guessing game where we can enter a maximum number and the game generates
+
+a number between one and this provided maximum number.
+
+Then the player has to guess the correct number.
+
+If the player guesses a wrong number, they will be alerted that their guess is either too high or too
+
+low compared to this secret number that was generated that we're actually trying to guess.
+
+Now let's actually demonstrate how this works really quickly so we can open the index.html file in our
+
+browser.
+
+I already had it open so we can see that we start off with this prompt to enter the maximum number.
+
+So let's say we enter number ten here, then we get a prompt to enter our first guess.
+
+So we can start with, let's say number five and it's saying number five is too low.
+
+So let's try with a number greater than five.
+
+So for example, let's try with eight here and now it's saying eight is too high.
+
+So we could try number seven here.
+
+And yes, it says congrats, you win.
+
+And it took me three tries to actually guess this correct secret number.
+
+Now let's go back to our code editor to explain the logic of our JavaScript code.
+
+We can start with the first line of code here.
+
+This line prompts the user to enter the maximum number for the game as we've seen, and the prompt function
+
+displays a dialog box that asks for the user input, and then the parse end function here parses the
+
+user's input as an integer.
+
+Finally, we save the user's input to this maximum variable.
+
+Next, we use the while loop to make sure the user enters a valid number.
+
+If the user enters an invalid input, we keep prompting them until they actually enter a valid number.
+
+The exclamation point maximum while loop condition checks is the value of the maximum variable is falsy
+
+and Falsy.
+
+Values in JavaScript include values such as null undefined zero, an empty string or the special nan
+
+value which stands for not a number.
+
+Now the parseint function here will actually return this NAN value if we type invalid input so it cannot
+
+be converted to an integer.
+
+That means if the user keeps inputting something that cannot be parsed to an integer, we will actually
+
+keep prompting the user to enter a valid number and reassign their input to the maximum variable.
+
+In other words, we keep looping until the user enters a valid number.
+
+Next, we use a combination of Math.floor and Math.random methods in this expression here to actually
+
+generate a random secret number between one and the maximum number that the user previously entered.
+
+Now the Math.random function here returns a random number starting from zero inclusive up to one, but
+
+not including one.
+
+Exactly.
+
+Then we multiply this number by the maximum number that the user entered and round it down to the nearest
+
+integer using this Math.floor built in method in JavaScript, this gives us a random integer starting
+
+from zero and up to the maximum number.
+
+We then add one to the result to shift the range to start from one up to the maximum number, but including
+
+the maximum number.
+
+Now and then we save this random number to a variable named target NUM.
+
+Next we prompt the user to enter their first guess.
+
+Here we again use the prompt function to ask the user for their guess and then parse their input as
+
+an integer using the parsing function again.
+
+And we save the user's input into a variable called guess.
+
+Here.
+
+Also, we initialize a variable called attempts to keep track of the number of attempts the user takes
+
+to actually guess the correct number.
+
+As you can see, we set the initial value of attempts to one since the user has already technically
+
+made one guess at this point.
+
+From there we actually use another while loop to keep the game running until the user guesses the correct
+
+number or type skew to actually quit the condition of the while loop here actually checks if the user's
+
+guess is not equal to the target number.
+
+That means on every iteration or repetition of the while loop, it would check this condition and it
+
+would only run the while loop code if the guess is not equal to the target number.
+
+If the guess is equal to the target number, this condition will be false and the loop would not continue
+
+to run.
+
+If the user's guess is incorrect, we give them a hint by prompting them to enter a new guess that is
+
+either lower or higher than the previous guess, depending on whether their previous guess was actually
+
+too high or too low.
+
+We also increment the attempts variable to keep track of the number of attempts that the user has made.
+
+And then as mentioned, if the user types Q in the prompt, we break out of the while loop using this
+
+break statement, and that would basically end the game.
+
+If we scroll down our code here, we can see that if the guess equals Q, then we say, okay, quit.
+
+Otherwise, if this part of the code is reached and they haven't typed Q it means that they actually
+
+guessed the correct number.
+
+So we say, Congrats, you win and we show them how many attempts they actually needed to guess the
+
+right secret number.
+
+However, in this code we actually discovered a bug where the user cannot type Q to quit the game after
+
+setting the maximum.
+
+So on the first attempt, instead the user had to actually type Q again in the repeated prompt for the
+
+game to finally quit.
+
+So now we'll address this bug and actually provide a way to fix it.
+
+Let's now switch back to our browser to actually demonstrate this first.
+
+So I'll just refresh the page to start a new game here and then let's type any max number here.
+
+Let's say five press.
+
+Okay.
+
+And then if we type Q and this first guess and press enter here, we actually see that it did not quit
+
+the game.
+
+It actually said too low here.
+
+So that's not what we want.
+
+So what happens here is if the user types.
+
+Q and their first guess before the actual while loop the program treats it as a valid guess and prompts
+
+the user to enter a new guess leading to unexpected behavior.
+
+Let's now jump back to our code editor to review our code here.
+
+Basically, the bug occurs because of this line here, because if the user types Q and their first guess,
+
+the Parseint function returns A And the not a number value, but that scenario is not really handled
+
+here.
+
+So the code can actually enter the while loop and keep prompting the user for new guesses, not realizing
+
+that the user actually tried to quit the game there.
+
+So if we enter Q in the prompt, Parseint will actually try to parse it to an integer, but it will
+
+fail and it will return the nan or not a number value and assign that to the guess variable here.
+
+Then let's try to parse it to an integer again, and that's not going to be equal to the target num
+
+for sure.
+
+Which means the while loop can actually run because the loop condition is true.
+
+And that's why the game continues.
+
+And you probably noticed that it actually set to low when we entered.
+
+Q as our first guess, and that happens because of the way we actually structured our, if else logic
+
+here.
+
+So the if condition will check if our guess is greater than the target number and if it's not, the
+
+else condition would run, meaning it would also run when the guess is invalid or when it's at the end,
+
+not the number value as well.
+
+So the else block does not only run when our guess is lower than the target number, but it also runs
+
+if we type an invalid input that actually stores the NAN or the not a number value into the guess variable.
+
+So the lesson here is that we want to be explicit with our conditions and that's what we're going to
+
+do when we actually start fixing this issue in the code.
+
+Now to start fixing this, we definitely want to remove the parsing call here so we can actually allow
+
+the user to enter.
+
+Q On the first attempt to quit the game.
+
+And so we avoid all this potential issues that we've just seen.
+
+So let's remove the parsing call here and this parentheses here.
+
+And so we just leave this prompt directly and store that to the guess variable.
+
+And in the prompt we can actually let the user know that they can actually type Q to quit the game like
+
+this.
+
+We still need to parse the input from the prompt because again, a reminder, the prompt function always
+
+returns a string even if we type just digits into it.
+
+And we can basically do the parsing here inside of the while loop after we check if the guess equals
+
+Q So to give it a chance to see if the user wants to quit the game first, and if they don't want to
+
+quit the game, we add this line here saying guess equals parse int guess again here.
+
+So this takes whatever the current value of the guess is and then tries to parse it to an integer and
+
+assigns that or updates that to the guess variable again.
+
+So again, we first check if the guess equals Q here.
+
+If it does, we break the game.
+
+If not, we can actually continue to parse the guess to an integer.
+
+We increment the attempts and then we can do the conditional logic to actually check if the guess is
+
+greater than target.
+
+None.
+
+First, that's fine, but to avoid any issues or any confusion, we want to be explicit with our else
+
+if here to to actually check if the guess is lower than the target num so we can write guess less than
+
+target num.
+
+Now this handles both situations when the guess is actually a valid number that we were able to convert
+
+to an integer.
+
+But if the user entered an invalid input both of these if and else if conditions will be false.
+
+So we actually need to add one more else block here to actually treat the invalid input scenarios as
+
+well.
+
+So let's write the else block here, so else, and then we open a set of curly brackets there inside
+
+of the curly brackets.
+
+We should actually just write guess equals and then a new prompt here.
+
+And the prompt we can say something like invalid guess, please enter a number or Q to quit with this,
+
+we basically handle all the situations so when the user enters a valid number or an invalid guess,
+
+or if they type Q to actually quit the game.
+
+However, there's a small detail here about incrementing the attempts variable.
+
+So as it stands now, the attempts variable would be incremented even if the user made an invalid guess.
+
+So if you don't want to do that, we could actually remove the attempts plus plus line from here and
+
+then we can just add it to the if block and to the if else block as well.
+
+So it only gets incremented in the scenarios where a user enters a valid number so we can type attempts

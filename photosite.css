@@ -1,0 +1,14 @@
+img {
+    width: 30%;
+    margin: calc(10%/6);
+}
+
+nav {
+    text-transform: uppercase;
+    font-family: lato;
+    border-bottom: 2px solid #f1f1f1f1;
+    width: 30%;
+    margin: calc(10%/6);
+    padding: 20px 10px;
+
+}
